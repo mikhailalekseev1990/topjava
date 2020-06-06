@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page import="ru.javawebinar.topjava.model.Meal" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static sun.misc.MessageUtils.out" %>
@@ -14,37 +16,42 @@
     <title>Meals</title>
 </head>
 <body>
-<h2>Meals</h2>
-</div>
 <table border="3">
-    <caption>Meals</caption>
+    <caption>
+        <h2>Meals</h2></caption>
     <tr>
         <th>Date</th>
         <th>Description</th>
         <th>Calories</th>
-
     </tr>
-    <%--            <tr>--%>
 
-    <%
-        List<MealTo> meals = (List<MealTo>) request.getAttribute("mealsList");
+    <jsp:useBean id="mealsList" scope="request" type="java.util.List"/>
+    <c:forEach items="${mealsList}" var="mealTo">
+        <tr style="color:${mealTo.isExcess() ? 'blue' : 'red'}">
+            <td><c:out value="${mealTo.parseDateTime()}"/></td>
+            <td><c:out value="${mealTo.getDescription()}"/></td>
+            <td><c:out value="${mealTo.getCalories()}"/></td>
+        </tr>
+    </c:forEach>
 
-        if (meals != null && !meals.isEmpty()) {
-            out.println("<ui>");
-            for (MealTo meal : meals) {
-                if (meal.isExcess()) out.println("<tr  style=\"color:blue;\">");
-                else out.println("<tr  style=\"color:red;\">");
-                out.println("<td> " + meal.getDateTime() + "</td>");
-                out.println("<td>" + meal.getDescription() + "</td>");
-                out.println("<td>" + meal.getCalories() + "</td>");
-            }
-            out.println("</ui>");
-        } else out.println("<p>There are no meals yet!</p>");
-    %>
-    </tr>
+    <%--    <%--%>
+    <%--        List<MealTo> meals = (List<MealTo>) request.getAttribute("mealsList");--%>
+
+    <%--        if (meals != null && !meals.isEmpty()) {--%>
+    <%--            out.println("<ui>");--%>
+    <%--            <c : forEach--%>
+    <%--            for (MealTo meal : meals) {--%>
+    <%--                if (!meal.isExcess()) out.println("<tr  style=\"color:blue;\">");--%>
+    <%--                else out.println("<tr  style=\"color:red;\">");--%>
+    <%--                out.println("<td> " + meal.getDateTime().toLocalDate() + " " + meal.getDateTime().toLocalTime() + "</td>");--%>
+    <%--                out.println("<td>" + meal.getDescription() + "</td>");--%>
+    <%--                out.println("<td>" + meal.getCalories() + "</td>");--%>
+    <%--            }--%>
+    <%--            out.println("</ui>");--%>
+    <%--        } else out.println("<p>There are no meals yet!</p>");--%>
+    <%--  </tr>   %>--%>
+
 </table>
-
-
 <div>
     <button onclick="location.href='/topjava'">Back</button>
 </div>

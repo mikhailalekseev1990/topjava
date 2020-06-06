@@ -43,4 +43,8 @@ public class MealTo {
                 ", excess=" + excess +
                 '}';
     }
+
+    public String parseDateTime() {
+        return dateTime.toLocalDate() + " " + dateTime.toLocalTime();
+    }
 }
