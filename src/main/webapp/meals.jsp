@@ -20,6 +20,7 @@
     <caption>
         <h2>Meals</h2></caption>
     <tr>
+        <th>Id</th>
         <th>Date</th>
         <th>Description</th>
         <th>Calories</th>
@@ -28,6 +29,7 @@
     <jsp:useBean id="mealsList" scope="request" type="java.util.List"/>
     <c:forEach items="${mealsList}" var="mealTo">
         <tr style="color:${mealTo.isExcess() ? 'blue' : 'red'}">
+            <td><c:out value="${mealTo.getId()}"/></td>
             <td><c:out value="${mealTo.parseDateTime()}"/></td>
             <td><c:out value="${mealTo.getDescription()}"/></td>
             <td><c:out value="${mealTo.getCalories()}"/></td>
@@ -52,6 +54,20 @@
     <%--  </tr>   %>--%>
 
 </table>
+
+<div>
+    <form action="${add}" method="post">
+        <p>
+            Meal DateTime:
+            <input type="text" name="dateTime" value="<c:out value="${dateTime}"/> ">
+            Meal Description:
+            <input type="text" name="description" value="<c:out value="${description}"/>">
+            Meal Calories:
+            <input type="text" name="calories" value="<c:out value="${calories}"/>">
+            <input type="submit" value="add"></p>
+    </form>
+</div>
+
 <div>
     <button onclick="location.href='/topjava'">Back</button>
 </div>
