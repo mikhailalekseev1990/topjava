@@ -5,6 +5,7 @@ import ru.javawebinar.topjava.model.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -13,10 +14,11 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MealRepoImp implements MealRepo {
 
     Map<Long, Meal> storage = Storage.getInstance().getStorage();
+    long lastIndex = Collections.max(storage.keySet());
 
     @Override
     public void add(LocalDateTime dateTime, String description, int calories) {
-        storage.put((long) storage.size() + 1, new Meal((long) storage.size() + 1, dateTime, description, calories));
+        storage.put(lastIndex + 1, new Meal(lastIndex + 1, dateTime, description, calories));
     }
 
     @Override

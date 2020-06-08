@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 import ru.javawebinar.topjava.repository.MealRepo;
@@ -23,18 +25,39 @@ import java.util.stream.Collectors;
 
 public class MealServlet extends HttpServlet {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String dateTime = request.getParameter("dateTime");
-        String description = request.getParameter("description");
-        int calories = Integer.parseInt(request.getParameter("calories"));
-        LocalDateTime localDateTime = LocalDateTime
-                .parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
         MealRepo mealRepo = new MealRepoImp();
-        mealRepo.add(localDateTime, description, calories);
-        response.sendRedirect("meals");
 
+        String mealId = request.getParameter("id");
+        LOG.debug(mealId);
+        String dateTime = request.getParameter("dateTime");
+        LOG.debug(dateTime);
+        String description = request.getParameter("description");
+        LOG.debug(description);
+        String calories = request.getParameter("calories");
+        LOG.debug(calories);
+        String submit = request.getParameter("submit");
+        LOG.debug(submit);
+
+        if (submit.equalsIgnoreCase("delete")) {                //condition for delete
+            Long id = Long.parseLong(mealId);
+            mealRepo.delete(id);
+        } else if (submit.equalsIgnoreCase("add")) {
+            LocalDateTime localDateTime = LocalDateTime
+                    .parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+
+            mealRepo.add(localDateTime, description, Integer.parseInt(calories));
+        } else if (submit.equalsIgnoreCase("update")) {
+            Long idUpdate = Long.parseLong(mealId);
+            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+
+            mealRepo.update(new Meal(idUpdate, dateTimeUpdate, description, Integer.parseInt(calories)));
+        }
+        response.sendRedirect("meals");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

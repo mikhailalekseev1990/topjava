@@ -33,38 +33,35 @@
             <td><c:out value="${mealTo.parseDateTime()}"/></td>
             <td><c:out value="${mealTo.getDescription()}"/></td>
             <td><c:out value="${mealTo.getCalories()}"/></td>
+            <td><a href="meals?action=update&id=<c:out value="${mealTo.id}"/>">Update</a></td>
+            <td><a href="meals?action=delete&id=<c:out value="${mealTo.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
 
-    <%--    <%--%>
-    <%--        List<MealTo> meals = (List<MealTo>) request.getAttribute("mealsList");--%>
-
-    <%--        if (meals != null && !meals.isEmpty()) {--%>
-    <%--            out.println("<ui>");--%>
-    <%--            <c : forEach--%>
-    <%--            for (MealTo meal : meals) {--%>
-    <%--                if (!meal.isExcess()) out.println("<tr  style=\"color:blue;\">");--%>
-    <%--                else out.println("<tr  style=\"color:red;\">");--%>
-    <%--                out.println("<td> " + meal.getDateTime().toLocalDate() + " " + meal.getDateTime().toLocalTime() + "</td>");--%>
-    <%--                out.println("<td>" + meal.getDescription() + "</td>");--%>
-    <%--                out.println("<td>" + meal.getCalories() + "</td>");--%>
-    <%--            }--%>
-    <%--            out.println("</ui>");--%>
-    <%--        } else out.println("<p>There are no meals yet!</p>");--%>
-    <%--  </tr>   %>--%>
 
 </table>
+<%--<p><a href="meals?action=add">Add</a></p>--%>
 
 <div>
-    <form action="${add}" method="post">
+    <form action="meals" method="post">
+
         <p>
+            Meal Id:
+            <input type="number" name="id" value="<c:out value="${id}"/> ">
             Meal DateTime:
             <input type="text" name="dateTime" value="<c:out value="${dateTime}"/> ">
             Meal Description:
             <input type="text" name="description" value="<c:out value="${description}"/>">
             Meal Calories:
-            <input type="text" name="calories" value="<c:out value="${calories}"/>">
-            <input type="submit" value="add"></p>
+            <input type="text" name="calories" value="<c:out value="${calories}"/>"></p>
+        <p>
+            <input type="submit" name="submit" value="add"></p>
+        <p>
+            <input type="submit" name="submit" value="update"></p>
+        <p>
+            <input type="submit" name="submit" value="delete"></p>
+        <p>
+
     </form>
 </div>
 
