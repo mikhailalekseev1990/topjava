@@ -44,7 +44,6 @@
 
 <div>
     <form action="meals" method="post">
-
         <p>
             Meal Id:
             <input type="number" name="id" value="<c:out value="${id}"/> ">

@@ -57,10 +57,18 @@ public class MealServlet extends HttpServlet {
 
             mealRepo.update(new Meal(idUpdate, dateTimeUpdate, description, Integer.parseInt(calories)));
         }
+        else if(submit.equalsIgnoreCase("save")){
+            Long idUpdate = Long.parseLong(mealId);
+            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+
+            mealRepo.update(new Meal(idUpdate, dateTimeUpdate, description, Integer.parseInt(calories)));
+        }
         response.sendRedirect("meals");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
         MealRepo mealRepo = new MealRepoImp();
         List<Meal> meals = mealRepo.getAll();
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
@@ -72,10 +80,18 @@ public class MealServlet extends HttpServlet {
                 .map(meal -> MealsUtil.createTo(meal, caloriesSumByDate.get(meal.getDate()) > 1999))
                 .collect(Collectors.toList());
 
-        request.setAttribute("mealsList", mealsTo);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("meals.jsp");
-        requestDispatcher.forward(request, response);
-
+        if (action == null) {
+            request.setAttribute("mealsList", mealsTo);
+            request.getRequestDispatcher("meals.jsp").forward(request, response);
+        } else if (action.equalsIgnoreCase("update")) {
+            request.setAttribute("meal", mealRepo.getById(Long.parseLong(request.getParameter("id"))));
+            request.getRequestDispatcher("update.jsp").forward(request, response);
+        } else if (action.equalsIgnoreCase("delete")) {
+            LOG.debug(action);
+            mealRepo.delete(Long.parseLong(request.getParameter("id")));
+            request.setAttribute("mealsList", mealsTo);
+            request.getRequestDispatcher("meals.jsp").forward(request, response);
+        }
     }
 }
