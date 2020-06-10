@@ -12,13 +12,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MealRepoImp implements MealRepo {
-
-   private Map<Long, Meal> storage = Storage.getInstance().getStorage();
-    private long lastIndex = Collections.max(storage.keySet());
+    private Map<Long, Meal> storage = Storage.getInstance().getStorage();
 
     @Override
     public void add(LocalDateTime dateTime, String description, int calories) {
-        storage.put(lastIndex + 1, new Meal(lastIndex + 1, dateTime, description, calories));
+        Long id = Storage.getInstance().getAtomicId().incrementAndGet();
+        storage.put(id, new Meal(id, dateTime, description, calories));
     }
 
     @Override
