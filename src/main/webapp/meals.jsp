@@ -40,7 +40,6 @@
 
 
 </table>
-<%--<p><a href="meals?action=add">Add</a></p>--%>
 
 <div>
     <form action="meals" method="post">
@@ -48,7 +47,7 @@
             Meal Id:
             <input type="number" name="id" value="<c:out value="${id}"/> ">
             Meal DateTime:
-            <input type="text" name="dateTime" value="<c:out value="${dateTime}"/> ">
+            <input type="datetime-local" name="dateTime" value="<c:out value="${dateTime}"/> ">
             Meal Description:
             <input type="text" name="description" value="<c:out value="${description}"/>">
             Meal Calories:

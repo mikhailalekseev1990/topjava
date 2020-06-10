@@ -48,18 +48,17 @@ public class MealServlet extends HttpServlet {
             mealRepo.delete(id);
         } else if (submit.equalsIgnoreCase("add")) {
             LocalDateTime localDateTime = LocalDateTime
-                    .parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+                    .parse(dateTime);
 
             mealRepo.add(localDateTime, description, Integer.parseInt(calories));
         } else if (submit.equalsIgnoreCase("update")) {
             Long idUpdate = Long.parseLong(mealId);
-            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime);
 
             mealRepo.update(new Meal(idUpdate, dateTimeUpdate, description, Integer.parseInt(calories)));
-        }
-        else if(submit.equalsIgnoreCase("save")){
+        } else if (submit.equalsIgnoreCase("save")) {
             Long idUpdate = Long.parseLong(mealId);
-            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+            LocalDateTime dateTimeUpdate = LocalDateTime.parse(dateTime);
 
             mealRepo.update(new Meal(idUpdate, dateTimeUpdate, description, Integer.parseInt(calories)));
         }
@@ -85,13 +84,16 @@ public class MealServlet extends HttpServlet {
             request.setAttribute("mealsList", mealsTo);
             request.getRequestDispatcher("meals.jsp").forward(request, response);
         } else if (action.equalsIgnoreCase("update")) {
-            request.setAttribute("meal", mealRepo.getById(Long.parseLong(request.getParameter("id"))));
+            Long id = Long.parseLong(request.getParameter("id"));
+            Meal meal = mealRepo.getById(id);
+            mealRepo.update(meal);
+            request.setAttribute("meal", meal);
             request.getRequestDispatcher("update.jsp").forward(request, response);
         } else if (action.equalsIgnoreCase("delete")) {
             LOG.debug(action);
             mealRepo.delete(Long.parseLong(request.getParameter("id")));
             request.setAttribute("mealsList", mealsTo);
-            request.getRequestDispatcher("meals.jsp").forward(request, response);
+            response.sendRedirect("meals");
         }
     }
 }

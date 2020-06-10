@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class MealRepoImp implements MealRepo {
 
-    Map<Long, Meal> storage = Storage.getInstance().getStorage();
-    long lastIndex = Collections.max(storage.keySet());
+   private Map<Long, Meal> storage = Storage.getInstance().getStorage();
+    private long lastIndex = Collections.max(storage.keySet());
 
     @Override
     public void add(LocalDateTime dateTime, String description, int calories) {

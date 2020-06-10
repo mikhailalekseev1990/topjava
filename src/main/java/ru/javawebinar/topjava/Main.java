@@ -15,7 +15,7 @@ public class Main {
 
 
         LocalDateTime localDateTime = LocalDateTime
-                .parse( "2020-01-31 21:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+                .parse( "2020-01-31T21:00, 11:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         System.out.println(localDateTime);
     }
 }

@@ -19,17 +19,17 @@
         <form method="post" action="meals">
             <br>
             <div>
-                ID
+                ID ${meal.id}
             </div>
             <label>
-                <input placeholder="${meal.id}" type="text" name="id" value="${meal.id}"/>
+                <input hidden placeholder="${meal.id}" type="text" name="id" value="${meal.id}"/>
             </label>
             <br>
             <div>
                 Date
             </div>
             <label>
-                <input type="text" name="dateTime" value="${meal.dateTime}"/>
+                <input type="datetime-local" name="dateTime" value="${meal.dateTime}"/>
             </label>
             <br>
             <div>
