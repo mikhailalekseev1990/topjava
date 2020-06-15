@@ -9,6 +9,8 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,13 +23,13 @@ public class MealService {
     private MealRepository repository;
 
 
-    public Meal create(Meal meal, int userId) throws NotFoundException {
+    public Meal create(Meal meal) throws NotFoundException {
         LOG.info("Create, id {}, userId {}", meal.getId(), meal.getUserId());
-        return repository.save(meal, userId);
+        return repository.save(meal, meal.getUserId());
     }
 
-    public Meal update(Meal meal, int userId) throws NotFoundException {
-        return checkNotFoundWithId(repository.save(meal, userId), meal.getId());
+    public Meal update(Meal meal) throws NotFoundException {
+        return checkNotFoundWithId(repository.save(meal, meal.getUserId()), meal.getId());
     }
 
     public void delete(int id, int userId) throws NotFoundException {
@@ -43,7 +45,11 @@ public class MealService {
         return repository.getAll(userId);
     }
 
-    public List<Meal> filerByDate(int userId, LocalDate startDate, LocalDate endDate) {
-        return repository.filerByDate(userId, startDate, endDate);
+    public List<Meal> filer(int userId, LocalDate start, LocalDate end) {
+        return repository.filer(userId, start, end);
+    }
+
+    public List<Meal> filer(int userId, LocalTime start, LocalTime end) {
+        return repository.filer(userId, start, end);
     }
 }

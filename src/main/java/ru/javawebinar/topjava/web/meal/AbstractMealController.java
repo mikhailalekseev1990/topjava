@@ -9,10 +9,14 @@ import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
+import static ru.javawebinar.topjava.util.MealsUtil.getTos;
+import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
 import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
 
 
@@ -25,13 +29,15 @@ public abstract class AbstractMealController {
     public Meal update(Meal meal, int id) {
         LOG.info("update {}", meal);
         assureIdConsistent(meal, id);
-        return mealService.update(meal, authUserId());
+        meal.setUserId(authUserId());
+        return mealService.update(meal);
     }
 
     public Meal create(Meal meal) {
         LOG.info("create {}", meal);
         checkNew(meal);
-        return mealService.create(meal, authUserId());
+        meal.setUserId(authUserId());
+        return mealService.create(meal);
     }
 
     public void delete(int id) {
@@ -47,12 +53,15 @@ public abstract class AbstractMealController {
 
     public List<MealTo> getAll() {
         LOG.info("getAll for userID {}", authUserId());
-        return MealsUtil.getTos(mealService.getAll(authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+        return getTos(mealService.getAll(authUserId()), DEFAULT_CALORIES_PER_DAY);
     }
 
-    public List<Meal> filerByDate(LocalDate startDate, LocalDate endDate) {
+    public List<MealTo> filer(LocalDate startDate, LocalDate endDate) {
         LOG.info("filterByDate for userID {}", authUserId());
-        return mealService.filerByDate(authUserId(), startDate, endDate);
+        return getTos(mealService.filer(authUserId(), startDate, endDate), DEFAULT_CALORIES_PER_DAY);
     }
-
+    public List<MealTo> filer(LocalTime startDate, LocalTime endDate) {
+        LOG.info("filterByDate for userID {}", authUserId());
+        return getTos(mealService.filer(authUserId(), startDate, endDate), DEFAULT_CALORIES_PER_DAY);
+    }
 }

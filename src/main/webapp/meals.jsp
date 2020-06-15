@@ -26,29 +26,34 @@
         <div>
             <div class="field">
                 <label>From Date:</label>
-                <input type="date" name="fromDate">
+                <input type="date" name="startDate">
             </div>
             <br>
             <div class="field">
                 <label>To Date:</label>
-                <input type="date" name="toDate">
+                <input type="date" name="endDate">
             </div>
             <br>
-            <input type="submit" name="FilterByDate" value="FilterByDate">
+            <input type="submit" name="filterByDate" value="Filter By Date">
             <br>
             <br>
             <div class="field">
                 <label>From Time:</label>
-                <input type="time" name="fromTime">
+                <input type="time" name="startTime">
             </div>
             <br>
             <div class="field">
                 <label>To Time:</label>
-                <input type="time" name="toTime">
+                <input type="time" name="endTime">
             </div>
             <br>
             <div class="field">
-                <input type="submit" name="FilterByTime" value="FilterByTime">
+                <input type="submit" name="filterByTime" value="Filter By Time">
+            </div>
+            <br>
+            <div class="field">
+                <label>Filter reset:</label>
+                <input type="submit" name="filterReset" value="Filter Reset">
             </div>
         </div>
     </form>

@@ -11,6 +11,8 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import sun.util.resources.LocaleData;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -60,9 +62,16 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> filerByDate(int userId, LocalDate startDate, LocalDate endDate) {
+    public List<Meal> filer(int userId, LocalDate startDate, LocalDate endDate) {
         return getAll(userId).stream()
-                .filter(mealTo -> DateTimeUtil.isBetween(mealTo.getDateTime().toLocalDate(), startDate, endDate))
+                .filter(meal -> DateTimeUtil.isBetween(meal.getDate(), startDate, endDate))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Meal> filer(int userId, LocalTime startDate, LocalTime endDate) {
+        return getAll(userId).stream()
+                .filter(meal -> DateTimeUtil.isBetween(meal.getTime(), startDate, endDate))
                 .collect(Collectors.toList());
     }
 
