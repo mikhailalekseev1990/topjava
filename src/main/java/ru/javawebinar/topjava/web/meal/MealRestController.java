@@ -1,13 +1,13 @@
 package ru.javawebinar.topjava.web.meal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MealRestController extends AbstractMealController {
@@ -36,4 +36,5 @@ public class MealRestController extends AbstractMealController {
     public List<MealTo> getAll() {
         return super.getAll();
     }
+
 }

@@ -8,6 +8,7 @@ import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
@@ -21,11 +22,10 @@ public abstract class AbstractMealController {
     private MealService mealService;
 
 
-
     public Meal update(Meal meal, int id) {
         LOG.info("update {}", meal);
         assureIdConsistent(meal, id);
-        return mealService.update(meal,authUserId());
+        return mealService.update(meal, authUserId());
     }
 
     public Meal create(Meal meal) {
@@ -49,4 +49,10 @@ public abstract class AbstractMealController {
         LOG.info("getAll for userID {}", authUserId());
         return MealsUtil.getTos(mealService.getAll(authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
+
+    public List<Meal> filerByDate(LocalDate startDate, LocalDate endDate) {
+        LOG.info("filterByDate for userID {}", authUserId());
+        return mealService.filerByDate(authUserId(), startDate, endDate);
+    }
+
 }

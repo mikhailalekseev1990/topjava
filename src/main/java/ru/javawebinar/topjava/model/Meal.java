@@ -1,19 +1,24 @@
 package ru.javawebinar.topjava.model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 public class Meal extends AbstractBaseEntity {
+    private  final Logger LOG = LoggerFactory.getLogger(getClass());
     private final LocalDateTime dateTime;
     private final String description;
     private final int calories;
     private final Integer userId;
     public int getUserId() {
+        LOG.info("userId {}", userId);
         return userId;
     }
     public Meal(Integer userId, LocalDateTime dateTime, String description, int calories) {
         this(null, userId, dateTime, description, calories);
     }
-    public Meal(LocalDateTime dateTime, String description, int calories) {
+    public Meal( LocalDateTime dateTime, String description, int calories) {
         this(null, null, dateTime, description, calories);
     }
 
