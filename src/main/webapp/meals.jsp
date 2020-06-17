@@ -22,7 +22,7 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
-    <form method="post" action="meals?action=filter">
+    <form method="post" action="meals">
         <div>
             <div class="field">
                 <label>From Date:</label>

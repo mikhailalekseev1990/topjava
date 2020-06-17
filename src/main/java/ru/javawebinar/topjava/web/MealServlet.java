@@ -19,8 +19,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
-
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
     private MealRestController mealRestController;
@@ -36,15 +34,9 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-
-//
-//        LocalTime startTime =LocalTime.parse(request.getParameter("startTime"));
-//        LocalTime endTime = LocalTime.parse(request.getParameter("endTime"));
-
         String filterByDate = request.getParameter("filterByDate");
         String filterByTime = request.getParameter("filterByTime");
         String filterReset = request.getParameter("filterReset");
-
 
         if (filterByDate != null) {
             LocalDate startDate = LocalDate.parse(request.getParameter("startDate"));

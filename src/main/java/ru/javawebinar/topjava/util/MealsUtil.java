@@ -24,19 +24,19 @@ public class MealsUtil {
             new Meal(1, LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000),
             new Meal(1, LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 100),
             new Meal(1, LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 110),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 200),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 2000),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 200),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 200),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 2000),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 200),
-            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 210),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак2", 200),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед2", 2000),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин2", 200),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение2", 200),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак2", 2000),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед2", 200),
+            new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин2", 210),
             new Meal(1, LocalDateTime.of(2020, Month.JUNE, 14, 10, 0), "Завтрак", 100),
             new Meal(1, LocalDateTime.of(2020, Month.JUNE, 13, 13, 0), "Обед", 1000),
             new Meal(1, LocalDateTime.of(2020, Month.JUNE, 15, 20, 0), "Ужин", 100),
-            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 14, 10, 0), "Завтрак", 100),
-            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 13, 13, 0), "Обед", 1000),
-            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 15, 20, 0), "Ужин", 100)
+            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 14, 10, 0), "Завтрак2", 100),
+            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 13, 13, 0), "Обед2", 1000),
+            new Meal(2, LocalDateTime.of(2020, Month.JUNE, 15, 20, 0), "Ужин2", 100)
 
     );
 

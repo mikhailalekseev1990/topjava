@@ -61,7 +61,7 @@ public abstract class AbstractMealController {
         return getTos(mealService.filer(authUserId(), startDate, endDate), DEFAULT_CALORIES_PER_DAY);
     }
     public List<MealTo> filer(LocalTime startDate, LocalTime endDate) {
-        LOG.info("filterByDate for userID {}", authUserId());
+        LOG.info("filterByTime for userID {}", authUserId());
         return getTos(mealService.filer(authUserId(), startDate, endDate), DEFAULT_CALORIES_PER_DAY);
     }
 }

@@ -9,7 +9,7 @@ public class DateTimeUtil {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static <T extends Comparable<T>> boolean isBetween(T sp, T start, T end) {
-        return sp.compareTo(start) >= 0 && sp.compareTo(end) < 0;
+        return sp.compareTo(start) >= 0 && sp.compareTo(end) <= 0;
     }
 
     public static String toString(LocalDateTime ldt) {
