@@ -8,12 +8,10 @@ import ru.javawebinar.topjava.repository.UserRepository;
 
 import java.util.Collections;
 import java.util.List;
-@Repository
-public class  InMemoryUserRepository implements UserRepository {
-    private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
-    public static final int ADMIN_ID=1;
-    public static final int USER_ID=2;
 
+@Repository
+public class InMemoryUserRepository implements UserRepository {
+    private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
 
     @Override
     public boolean delete(int id) {
