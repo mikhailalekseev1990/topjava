@@ -1,16 +1,19 @@
 package ru.javawebinar.topjava.web.user;
 
+import org.assertj.core.internal.bytebuddy.build.Plugin;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.Arrays;
 
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
+
 
 public class InMemoryAdminRestControllerTest {
     private static final Logger log = LoggerFactory.getLogger(InMemoryAdminRestControllerTest.class);
@@ -21,10 +24,10 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml", "spring/spring-app.xml");
         log.info("\n{}\n", Arrays.toString(appCtx.getBeanDefinitionNames()));
         controller = appCtx.getBean(AdminRestController.class);
-        repository = appCtx.getBean(InMemoryUserRepository.class);
+
     }
 
     @AfterClass
@@ -34,7 +37,7 @@ public class InMemoryAdminRestControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        // re-initialize
+        repository = appCtx.getBean(InMemoryUserRepository.class);
         repository.init();
     }
 
