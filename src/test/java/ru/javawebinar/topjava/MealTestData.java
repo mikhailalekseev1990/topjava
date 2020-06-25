@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
+import static org.junit.Assert.*;
 
 public class MealTestData {
 
@@ -57,6 +58,7 @@ public class MealTestData {
         updated.setDescription("Ланч");
         return updated;
     }
+
     public static Meal getUpdatedNotFound() {
         Meal updated = new Meal(10, LocalDateTime.of(2020, 01, 30, 10, 23), "Завтрак", 1000);
         updated.setCalories(1111);
@@ -66,14 +68,15 @@ public class MealTestData {
     }
 
     public static void assertMatch(Meal actual, Meal expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected);
+        assertNotNull(actual);
+        assertNotNull(expected);
+        assertEquals(actual, expected);
     }
 
-    public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
+    public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
+        assertEquals(actual, expected);    }
 
-    public void assertMatch(Collection<Meal> expected, Collection<Meal> actual) {
-        assertThat(actual).isEqualTo(expected);
+    public static void assertMatch(Collection<Meal> expected, Collection<Meal> actual) {
+        assertEquals(actual, expected);
     }
 }

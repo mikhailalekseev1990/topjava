@@ -34,7 +34,6 @@ public class MealServiceTest {
 
 
     @Autowired
-    @Qualifier("jdbcMealRepository")
     MealRepository repository;
 
     @Test

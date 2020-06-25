@@ -38,7 +38,6 @@ public class UserServiceTest {
     @Autowired
     private UserService service;
 
-    @Qualifier("jdbcUserRepository")
     @Autowired
     private UserRepository repository;
 
