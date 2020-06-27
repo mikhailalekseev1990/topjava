@@ -24,10 +24,11 @@ public class JpaMealRepository implements MealRepository {
     public Meal save(Meal meal, int userId) {
         meal.setUser(manager.getReference(User.class, userId));
         if (meal.isNew()) {
+            meal.setUser(manager.getReference(User.class, userId));
             manager.persist(meal);
             return meal;
         } else {
-            return get(meal.getId(), userId) == meal ? manager.merge(meal) : null;
+            return get(meal.getId(), userId) == null ? null : manager.merge(meal);
         }
     }
 
