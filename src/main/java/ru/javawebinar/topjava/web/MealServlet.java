@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
@@ -22,7 +24,6 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 public class MealServlet extends HttpServlet {
-
     private ConfigurableApplicationContext springContext;
     private MealRestController mealController;
 
@@ -46,7 +47,6 @@ public class MealServlet extends HttpServlet {
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")));
-
         if (StringUtils.isEmpty(request.getParameter("id"))) {
             mealController.create(meal);
         } else {
