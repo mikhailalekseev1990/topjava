@@ -30,6 +30,7 @@ function deleteRow(id) {
         updateTable();
         successNoty("Deleted");
     });
+   // console.log(id);
 }
 
 function updateTable() {
