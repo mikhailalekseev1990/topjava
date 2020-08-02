@@ -5,21 +5,17 @@ function filterMeals() {
         url: context.ajaxUrl + "filter",
         type: "GET",
         data: $("#filter").serialize()
-    }).done(updateTable);
-}
-
-function updateTable(data) {
-    context.datatableApi.clear().rows.add(data).draw();
+    }).done(updateTableByData);
 }
 
 function clearFilter() {
     $.ajax({
         url: context.ajaxUrl,
         type: "GET",
-    }).done(updateTable);
+    }).done(updateTableByData);
 }
 
-function updateTable(data) {
+function updateTableByData(data) {
     context.datatableApi.clear().rows.add(data).draw();
 }
 
