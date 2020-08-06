@@ -1,3 +1,17 @@
+function enable(check, id) {
+    var enabled = check.is(":checked");
+    $.ajax({
+        url: "admin/users/" + id,
+        type: "POST",
+        data: "enabled=" + enabled
+    }).done(function () {
+        successNoty(enabled ? "Enable" : "Disable");
+        check.closest("tr").attr("Enabled", enabled);
+    }).fail(function () {
+        check.closest("tr").attr("Enabled", !enabled);
+    });
+}
+
 // $(document).ready(function () {
 $(function () {
     makeEditable({
