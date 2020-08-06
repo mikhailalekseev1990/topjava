@@ -1,16 +1,15 @@
 package ru.javawebinar.topjava.model;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import org.springframework.util.Assert;
-import org.springframework.data.domain.Persistable;
+
 import org.hibernate.Hibernate;
+import org.springframework.util.Assert;
+import ru.javawebinar.topjava.HasId;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
 @Access(AccessType.FIELD)
-//@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
-public abstract class AbstractBaseEntity implements Persistable<Integer> {
+public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -29,24 +28,20 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
         this.id = id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Override
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     // doesn't work for hibernate lazy proxy
     public int id() {
         Assert.notNull(id, "Entity must has id");
         return id;
-    }
-
-    @Override
-    public boolean isNew() {
-        return this.id == null;
     }
 
     @Override
