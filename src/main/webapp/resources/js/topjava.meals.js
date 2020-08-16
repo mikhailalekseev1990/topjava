@@ -63,3 +63,21 @@ $(function () {
         updateTable: updateFilteredTable
     });
 });
+
+
+$('.date_picker').datetimepicker({
+    timepicker: false,
+    format:'Y-m-d',
+    inline: false,
+    lang:'ru'
+});
+
+
+$('.time_picker').datetimepicker({
+    datepicker:false,
+    format:'H:i'
+})
+
+$('#dateTime').datetimepicker({
+    format:'Y-m-d H:i'
+})
